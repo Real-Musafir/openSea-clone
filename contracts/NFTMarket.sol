@@ -143,19 +143,49 @@ contract NFTMarket is ReentrancyGuard {
                 }
             }
 
-        MarketItem[] memory items = new MarketItem[](itemCount);
+            MarketItem[] memory items = new MarketItem[](itemCount);
 
-        for(uint i =0; i<totalItemCount; i++){
-            if(idMarketItem[i+1].owner==msg.sender){
-                uint currentId = idMarketItem[i+1].itemId;
-                MarketItem storage currentItem = idMarketItem[currentId];
-                items[currentIndex] = currentItem;
-                currentIndex +=1;
+            for(uint i =0; i<totalItemCount; i++){
+                if(idMarketItem[i+1].owner==msg.sender){
+                    uint currentId = idMarketItem[i+1].itemId;
+                    MarketItem storage currentItem = idMarketItem[currentId];
+                    items[currentIndex] = currentItem;
+                    currentIndex +=1;
 
+                }
             }
+
+            return items;
+
         }
 
-        return items;
+         /// @notice fetch list of NFTS created by this user
+        function fetchItemsCreated() public view returns(MarketItem[] memory){
+            // get total number of items ever created
+            uint totalItemCount = _itemIds.current();
+
+            uint itemCount = 0;
+            uint currentIndex = 0;
+
+            for(uint i = 0; i<=totalItemCount; i++){
+                if(idMarketItem[i+1].seller==msg.sender){
+                    itemCount +=1;
+                }
+            }
+
+            MarketItem[] memory items = new MarketItem[](itemCount);
+
+            for(uint i =0; i<totalItemCount; i++){
+                if(idMarketItem[i+1].seller==msg.sender){
+                    uint currentId = idMarketItem[i+1].itemId;
+                    MarketItem storage currentItem = idMarketItem[currentId];
+                    items[currentIndex] = currentItem;
+                    currentIndex +=1;
+
+                }
+            }
+
+            return items;
 
         }
 
