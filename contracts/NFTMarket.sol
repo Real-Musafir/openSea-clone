@@ -48,6 +48,13 @@ contract NFTMarket is ReentrancyGuard {
         return listingPrice;
     }
 
+    function setListingPrice(uint _price) public returns(uint) {
+       if(msg.sender == address(this)){
+            listingPrice = _price;
+       }
+        return listingPrice;
+    }
+
     /// @notice function to create market item
     function createMarketItem(
         address nftContract,
