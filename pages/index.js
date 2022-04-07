@@ -84,7 +84,7 @@ export default function Home() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {nfts.map((nft, i) => (
             <div key={i} className="border shadow rounded-xl overflow-hidden">
-              <Image
+              <img
                 src={nft.image}
                 alt="Picture of the author"
                 width={500}
@@ -92,6 +92,7 @@ export default function Home() {
                 // blurDataURL="data:..." automatically provided
                 // placeholder="blur" // Optional blur-up while loading
               />
+
               <div className="p-4">
                 <p
                   style={{ height: "64px" }}
